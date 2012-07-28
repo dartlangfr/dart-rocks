@@ -23,14 +23,16 @@ class Slides {
   int _currentPosition;
   int _slidesNumbers; 
   List<Element> _slides;
-  Element _counter;
+  Element _counterBackground;
+  Element _counterButton;  
   //List<String> _states = const ['distant-slide', 'far-past', ];
       
   start(){
     _currentPosition = 0;
     _slides = document.queryAll('.slide');
     _slidesNumbers = _slides.length;
-    _counter = document.query('#presentation-counter');
+    _counterBackground = document.query('#presentation-counter');
+    _counterButton = document.query("#slide-no");
     document.query('.slides').style.display = 'block';
     goPosition(_currentPosition, _currentPosition);
   }
@@ -47,10 +49,15 @@ class Slides {
     }    
   }
   
-  goPosition(int _fromPosition, int _toPosition){
-    _currentPosition = _toPosition;
-    _counter.innerHTML = (_currentPosition + 1).toString();
-    _slides[_fromPosition].classes.remove('current');
+  goPosition(int fromPosition, int toPosition){
+    _currentPosition = toPosition;
+    // Display current position
+    var position =  (_currentPosition + 1).toString();
+    _counterBackground.innerHTML = position;
+    _counterButton.innerHTML = position;
+    // Remove old classes;
+    _slides[fromPosition].classes.remove('current');
+    // Add new classes
     _slides[_currentPosition].classes.add('current');
   }
   
