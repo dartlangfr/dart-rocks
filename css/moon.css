@@ -268,7 +268,7 @@ body.three-d div.slides {
   font-family: 'Yanone Kaffeesatz';
   font-style: normal;
   font-weight: 400;
-  src: url('/src/fonts/yanone/YanoneKaffeesatz-Regular.ttf') format('truetype');
+  src: url('../src/fonts/yanone/YanoneKaffeesatz-Regular.ttf') format('truetype');
 }
 @font-face {
   font-family: 'Inconsolata';
