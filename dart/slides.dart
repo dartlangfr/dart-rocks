@@ -6,6 +6,7 @@ final int SPACE_KEY_CODE = 32;
 final int ZERO_KEY_CODE = 48;
 
 void main(){
+ // window.localStorage.$dom_setItem('value', 'toto');
   //var token = window.location.hash;
   Slides slides = new Slides();
   slides.start();
@@ -102,8 +103,11 @@ class Slides {
     var from = Math.max(_currentPosition-DISTANCE, 0);
     var to = Math.min(_currentPosition+DISTANCE, _slidesNumbers-1);
     for(int i = from; i<=to; i++){
-      // Remove
-      _slides[i].classes.remove(SLIDE_CLASSES[i-_currentPosition+DISTANCE+direction]);
+      var lastValueIndex = i-_currentPosition+DISTANCE+direction;
+      if(lastValueIndex >0 && lastValueIndex<SLIDE_CLASSES.length){
+        // Remove
+        _slides[i].classes.remove(SLIDE_CLASSES[lastValueIndex]);
+      }
       // Add
       _slides[i].classes.add(SLIDE_CLASSES[i-_currentPosition+DISTANCE]);
     }
