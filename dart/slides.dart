@@ -6,6 +6,7 @@ final int SPACE_KEY_CODE = 32;
 final int ZERO_KEY_CODE = 48;
 
 void main(){
+  //var token = window.location.hash;
   Slides slides = new Slides();
   slides.start();
   // Keybord 
@@ -27,6 +28,8 @@ void main(){
 
 class Slides {
   
+  
+  String _currentToken;
   int _currentPosition;
   int _slidesNumbers; 
   List<Element> _slides;
@@ -36,6 +39,7 @@ class Slides {
   static final String _CURRENT_CLASS = 'current';
   static final List<String> _PREVIOUS_CLASSES = const ['past', 'far-past', 'distant-slide'];
   static final List<String> _NEXT_CLASSES =  const ['future', 'far-future', 'distant-slide'];
+  //static final String START_TOKEN = '#landing-slide';
   
   static final SLIDE_CLASSES = const['distant-slide', 'far-past', 'past', 'current', 'future', 'far-future', 'distant-slide'];
   static final int DISTANCE = 3;
@@ -53,6 +57,9 @@ class Slides {
     // Mouse binding
     _bindClick();
     // Go !
+   // var elementToken = document.query(token);
+    //_currentToken = (elementToken == null) ? START_TOKEN : token;
+    //window.location.hash = _currentToken;
     goPosition(_currentPosition, 0);
   }
   
@@ -84,6 +91,9 @@ class Slides {
   
   goPosition(int position, int direction){
     _currentPosition = position+direction;
+    // Token
+    _currentToken = _slides[_currentPosition].id;
+    window.location.hash = '#${_currentToken}';
     // Display current position
     var displayPosition =  (_currentPosition + 1).toString();
     _counterBackground.innerHTML = displayPosition;
