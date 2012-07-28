@@ -7,6 +7,7 @@ final int SPACE_KEY_CODE = 32;
 void main(){
   Slides slides = new Slides();
   slides.start();
+  // Keybord 
   window.on.keyDown.add((KeyboardEvent event) {
     switch(event.keyCode){
       case RIGHT_KEY_CODE:
@@ -35,6 +36,7 @@ class Slides {
   static final int DISTANCE = 3;
       
   start(){
+    // Init
     _currentPosition = 0;
     _slides = document.queryAll('.slide');
     _slidesNumbers = _slides.length;
@@ -42,6 +44,10 @@ class Slides {
     _counterButton = document.query("#slide-no");
     document.query('.slides').style.display = 'block';
     _slides.forEach((element) => element.classes.add(SLIDE_CLASSES.last()));
+    // Mouse binding
+    document.query("#nav-next").on.click.add((e) => next());
+    document.query("#nav-prev").on.click.add((e) => previous());
+    // Go !
     goPosition(_currentPosition, 0);
   }
   
@@ -72,10 +78,6 @@ class Slides {
       // Add
       _slides[i].classes.add(SLIDE_CLASSES[i-_currentPosition+DISTANCE]);
     }
-    // Remove old classes;
-    //_slides[fromPosition].classes.remove(_CURRENT_CLASS);
-    // Add new classes
-    //_slides[_currentPosition].classes.add(_CURRENT_CLASS);
   }
   
 }
