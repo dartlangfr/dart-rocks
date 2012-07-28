@@ -3,6 +3,7 @@
 final int LEFT_KEY_CODE = 37;
 final int RIGHT_KEY_CODE = 39;
 final int SPACE_KEY_CODE = 32;
+final int ZERO_KEY_CODE = 48;
 
 void main(){
   Slides slides = new Slides();
@@ -17,6 +18,9 @@ void main(){
       case LEFT_KEY_CODE:
         slides.previous();
         break;
+      case ZERO_KEY_CODE:
+        slides.toggleHelp();
+        break;
     }
   });
 }
@@ -28,6 +32,7 @@ class Slides {
   List<Element> _slides;
   Element _counterBackground;
   Element _counterButton;
+  Element _help;
   static final String _CURRENT_CLASS = 'current';
   static final List<String> _PREVIOUS_CLASSES = const ['past', 'far-past', 'distant-slide'];
   static final List<String> _NEXT_CLASSES =  const ['future', 'far-future', 'distant-slide'];
@@ -44,11 +49,17 @@ class Slides {
     _counterButton = document.query("#slide-no");
     document.query('.slides').style.display = 'block';
     _slides.forEach((element) => element.classes.add(SLIDE_CLASSES.last()));
+    _help = document.query('#help');
     // Mouse binding
-    document.query("#nav-next").on.click.add((e) => next());
-    document.query("#nav-prev").on.click.add((e) => previous());
+    _bindClick();
     // Go !
     goPosition(_currentPosition, 0);
+  }
+  
+  _bindClick(){
+    document.query("#nav-next").on.click.add((e) => next());
+    document.query("#nav-prev").on.click.add((e) => previous());
+    document.query("#nav-help").on.click.add((e) => toggleHelp());
   }
   
   next(){
@@ -61,6 +72,14 @@ class Slides {
     if(_currentPosition > 0){
       goPosition(_currentPosition, -1);
     }    
+  }
+  
+  toggleHelp(){
+    if(_help.classes.contains('invisible')){
+      _help.classes.remove('invisible');
+    } else {
+      _help.classes.add('invisible');
+    }
   }
   
   goPosition(int position, int direction){
