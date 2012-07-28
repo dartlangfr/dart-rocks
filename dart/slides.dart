@@ -2,6 +2,7 @@
 
 final int LEFT_KEY_CODE = 37;
 final int RIGHT_KEY_CODE = 39;
+final int SPACE_KEY_CODE = 32;
 
 void main(){
   Slides slides = new Slides();
@@ -9,6 +10,7 @@ void main(){
   window.on.keyDown.add((KeyboardEvent event) {
     switch(event.keyCode){
       case RIGHT_KEY_CODE:
+      case SPACE_KEY_CODE:
         slides.next();
         break;
       case LEFT_KEY_CODE:
