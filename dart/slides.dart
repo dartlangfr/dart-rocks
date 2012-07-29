@@ -6,8 +6,6 @@ final int SPACE_KEY_CODE = 32;
 final int ZERO_KEY_CODE = 48;
 
 void main(){
- // window.localStorage.$dom_setItem('value', 'toto');
-  //var token = window.location.hash;
   Slides slides = new Slides();
   slides.start();
   // Keybord 
