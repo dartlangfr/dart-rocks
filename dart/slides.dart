@@ -30,7 +30,7 @@ class Slides {
   
   String _currentToken;
   int _currentPosition;
-  int _slidesNumbers; 
+  int _slidesNumbers;
   List<Element> _slides;
   Element _counterBackground;
   Element _counterButton;
@@ -68,14 +68,16 @@ class Slides {
   }
   
   _buildSummary(){
-    List<Element> _transitionSlides = document.queryAll('.transitionSlide');
+    List<Element> transitionSlides = document.queryAll('.transitionSlide');
     StringBuffer buffer = new StringBuffer();
-    _transitionSlides.forEach((e) {
+    transitionSlides.forEach((e) {
       ImageElement img = e.query('img');
       buffer.add('<li><a data-hash="${e.id}">${e.query('h2').innerHTML}</a>'); 
       buffer.add('<img src="${img.src.replaceAll('_64', '_32')}"></li>'); 
     });
-    document.query('#toc-list').innerHTML = buffer.toString();
+    Element tocList =  document.query('#toc-list');
+    tocList.innerHTML = buffer.toString();
+    tocList.queryAll('li a').forEach((element) => element.on.click.add((event) => goId(element.dataset['hash'])));
   }
   
   next(){
@@ -118,6 +120,26 @@ class Slides {
       }
       // Add
       _slides[i].classes.add(SLIDE_CLASSES[i-_currentPosition+DISTANCE]);
+    }
+  }
+  
+  goId(String id){
+    List<Element> elements = _slides.filter((e) => e.id == id);
+    if(elements.length == 1){
+      int index = _slides.indexOf(elements[0]);
+      // Neighboorhound become distant
+      var from = Math.max(_currentPosition-DISTANCE, 0);
+      var to = Math.min(_currentPosition+DISTANCE, _slidesNumbers-1); 
+      for(int i = from; i<=to; i++){
+        var lastValueIndex = i-_currentPosition+DISTANCE;
+        if(lastValueIndex >0 && lastValueIndex<SLIDE_CLASSES.length){
+          _slides[i].classes.remove(SLIDE_CLASSES[lastValueIndex]);
+        }
+        // Add
+        _slides[i].classes.add(SLIDE_CLASSES.last());
+      }
+      // go
+      goPosition(index, 0);
     }
   }
   
