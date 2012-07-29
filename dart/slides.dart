@@ -53,12 +53,11 @@ class Slides {
     document.query('.slides').style.display = 'block';
     _slides.forEach((element) => element.classes.add(SLIDE_CLASSES.last()));
     _help = document.query('#help');
+    // Summary
+    _buildSummary();
     // Mouse binding
     _bindClick();
     // Go !
-   // var elementToken = document.query(token);
-    //_currentToken = (elementToken == null) ? START_TOKEN : token;
-    //window.location.hash = _currentToken;
     goPosition(_currentPosition, 0);
   }
   
@@ -66,6 +65,17 @@ class Slides {
     document.query("#nav-next").on.click.add((e) => next());
     document.query("#nav-prev").on.click.add((e) => previous());
     document.query("#nav-help").on.click.add((e) => toggleHelp());
+  }
+  
+  _buildSummary(){
+    List<Element> _transitionSlides = document.queryAll('.transitionSlide');
+    StringBuffer buffer = new StringBuffer();
+    _transitionSlides.forEach((e) {
+      ImageElement img = e.query('img');
+      buffer.add('<li><a data-hash="${e.id}">${e.query('h2').innerHTML}</a>'); 
+      buffer.add('<img src="${img.src.replaceAll('_64', '_32')}"></li>'); 
+    });
+    document.query('#toc-list').innerHTML = buffer.toString();
   }
   
   next(){
