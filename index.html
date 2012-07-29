@@ -914,33 +914,46 @@ header {
           <header><span class="css">CSS</span> <h1>Hue/saturation/luminance color</h1></header>
           <section>
         <pre>color: <b>hsla</b>(
-  <span class="hsl-value" id="hsl-h-value">128</span> <input id="hsl-h" type="range" min="0" max="360" value="128" onchange="changeHSL()">
-  <span class="hsl-value" id="hsl-s-value">74%</span> <input id="hsl-s" type="range" min="0" max="100" value="75" onchange="changeHSL()">
-  <span class="hsl-value" id="hsl-l-value">33%</span> <input id="hsl-l" type="range" min="0" max="100" value="33" onchange="changeHSL()">
-  <span class="hsl-value" id="hsl-a-value">1.00</span> <input id="hsl-a" type="range" min="0" max="100" value="100" onchange="changeHSL()">
+  <span class="hsl-value" id="hsl-h-value">128</span> <input id="hsl-h" type="range" min="0" max="360" value="128" >
+  <span class="hsl-value" id="hsl-s-value">74%</span> <input id="hsl-s" type="range" min="0" max="100" value="75" >
+  <span class="hsl-value" id="hsl-l-value">33%</span> <input id="hsl-l" type="range" min="0" max="100" value="33" >
+  <span class="hsl-value" id="hsl-a-value">1.00</span> <input id="hsl-a" type="range" min="0" max="100" value="100" >
         </pre>
 
             <div id="hsl-example" class="example">
               HSL example
             </div>
 
-            <script defer>
-              function changeHSL() {
-                var h = document.getElementById('hsl-h').value * 1.0;
-                var s = document.getElementById('hsl-s').value * 1.0;
-                var l = document.getElementById('hsl-l').value * 1.0;
-                var a = (document.getElementById('hsl-a').value / 100).toFixed(2);
-                var el = document.getElementById('hsl-example');
-
-                el.style.color = 'hsla(' + h + ', ' + s + '%, ' + l + '%, ' + a + ')';
-
-                document.getElementById('hsl-h-value').textContent = h;
-                document.getElementById('hsl-s-value').textContent = s + '%,';
-                document.getElementById('hsl-l-value').textContent = l + '%,';
-                document.getElementById('hsl-a-value').textContent = a + ');';
+            <script type="application/dart" defer>
+              #import('dart:html');
+              
+              main(){
+				  document.query('#hsl-h').on.change.add(changeHSL);
+				  document.query('#hsl-s').on.change.add(changeHSL);
+				  document.query('#hsl-l').on.change.add(changeHSL);
+				  document.query('#hsl-a').on.change.add(changeHSL);              
               }
+              
+			changeHSL(Event e) {
+			  InputElement input;
+			  input = document.query('#hsl-h');
+			  var h = (input.valueAsNumber * 1.0).toInt();
+			  input = document.query('#hsl-s');
+			  var s = (input.valueAsNumber * 1.0).toInt();
+			  input = document.query('#hsl-l');
+			  var l = (input.valueAsNumber * 1.0).toInt();
+			  input = document.query('#hsl-a');
+			  var a = input.valueAsNumber / 100;
+			  var el = document.query('#hsl-example');
+			  
+			  el.style.color = 'hsla($h, $s%, $l%, $a)';
+			  
+			  document.query('#hsl-h-value').text = '$h';
+			  document.query('#hsl-s-value').text = '$s%,';
+			  document.query('#hsl-l-value').text = '$l%,';
+			  document.query('#hsl-a-value').text = '$a);';
+			}                
 
-              changeHSL();
             </script>
           </section>
         </div>
