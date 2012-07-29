@@ -958,7 +958,7 @@ header {
           </section>
         </div>
 
-
+		<!--
          <div class="slide styling" id="rounded-corners">
           <style>
           #doraemon {
@@ -973,35 +973,51 @@ header {
           <header><span class="css">CSS</span> <h1>Rounded corners</h1></header>
           <section>
             <pre>
-              face: <b>border-radius</b>: <span id="face-rounded-border-value">0</span>px; <input id="face-rounded-border" type="range" min="0" max="146" value="0" onchange="handleCorner(event)">
-              left eye: <b>border-radius</b>: <span id="lefteye-rounded-border-value">0</span>px; <input id="lefteye-rounded-border" type="range" min="0" max="35" value="0" onchange="handleCorner(event)">
-              right eye: <b>border-radius</b>: <span id="righteye-rounded-border-value">0</span>px; <input id="righteye-rounded-border" type="range" min="0" max="35" value="0" onchange="handleCorner(event)">
-              base white: <b>border-radius</b>: <span id="base_white-rounded-border-value">0</span>px; <input id="base_white-rounded-border" type="range" min="0" max="150" value="0" onchange="handleCorner(event)">
-              mouth: <b>border-radius</b>: <span id="mouth-rounded-border-value">0</span>px; <input id="mouth-rounded-border" type="range" min="0" max="120" value="0" onchange="handleCorner(event)">
-              nose: <b>border-radius</b>: <span id="nose-rounded-border-value">0</span>px; <input id="nose-rounded-border" type="range" min="0" max="50" value="0" onchange="handleCorner(event)">
-              left black eye: <b>border-radius</b>: <span id="leftblackeye-rounded-border-value">0</span>px; <input id="leftblackeye-rounded-border" type="range" min="0" max="35" value="0" onchange="handleCorner(event)">
-              right black eye: <b>border-radius</b>: <span id="rightblackeye-rounded-border-value">0</span>px; <input id="rightblackeye-rounded-border" type="range" min="0" max="35" value="0" onchange="handleCorner(event)">
+              face: <b>border-radius</b>: <span id="face-rounded-border-value">0</span>px; <input id="face-rounded-border" type="range" min="0" max="146" value="0" >
+              left eye: <b>border-radius</b>: <span id="lefteye-rounded-border-value">0</span>px; <input id="lefteye-rounded-border" type="range" min="0" max="35" value="0" >
+              right eye: <b>border-radius</b>: <span id="righteye-rounded-border-value">0</span>px; <input id="righteye-rounded-border" type="range" min="0" max="35" value="0" >
+              base white: <b>border-radius</b>: <span id="base_white-rounded-border-value">0</span>px; <input id="base_white-rounded-border" type="range" min="0" max="150" value="0" >
+              mouth: <b>border-radius</b>: <span id="mouth-rounded-border-value">0</span>px; <input id="mouth-rounded-border" type="range" min="0" max="120" value="0" >
+              nose: <b>border-radius</b>: <span id="nose-rounded-border-value">0</span>px; <input id="nose-rounded-border" type="range" min="0" max="50" value="0" >
+              left black eye: <b>border-radius</b>: <span id="leftblackeye-rounded-border-value">0</span>px; <input id="leftblackeye-rounded-border" type="range" min="0" max="35" value="0" >
+              right black eye: <b>border-radius</b>: <span id="rightblackeye-rounded-border-value">0</span>px; <input id="rightblackeye-rounded-border" type="range" min="0" max="35" value="0" >
             </pre>
             <div id="doraemon" class="example">
-              <iframe _src="src/rounded/write_doraemon.html"></iframe>
+              <iframe _src="src/rounded/write_doraemon.html" src="src/rounded/write_doraemon.html"></iframe>
             </div>
-            <script>
-              function handleCorner() {
-                var doraemon = document.querySelector('#doraemon iframe').contentWindow.document;
-                 var elements = ["face", "lefteye", "righteye", "base_white", "mouth", "nose", "leftblackeye", "rightblackeye"];
-                 for (var i = 0; i < elements.length; i++) {
-                   var element = elements[i] + '-rounded-border';
-                   var borderVal = document.getElementById(element).value;
-                   document.getElementById(element + '-value').textContent = borderVal;
-                   var faceEl = doraemon.getElementById(elements[i]);
-                   faceEl.style.borderRadius = borderVal + 'px';
-                   faceEl.style.mozBorderRadius = borderVal + 'px';
-                 }
-               }
+            <script type="application/dart" defer>
+            	#import('dart:html');
+            
+   				void main(){
+				  document.query('#face-rounded-border').on.change.add(handleCorner);
+				  document.query('#lefteye-rounded-border').on.change.add(handleCorner);
+				  document.query('#righteye-rounded-border').on.change.add(handleCorner);
+				  document.query('#base_white-rounded-border').on.change.add(handleCorner);
+				  document.query('#mouth-rounded-border').on.change.add(handleCorner);
+				  document.query('#nose-rounded-border').on.change.add(handleCorner);
+				  document.query('#leftblackeye-rounded-border').on.change.add(handleCorner);
+				  document.query('#rightblackeye-rounded-border').on.change.add(handleCorner);   				
+   				}
+   				
+				void handleCorner(Event e) {
+				  IFrameElement iframe = document.query('#doraemon iframe');
+				  Window iframeW = iframe.contentWindow;
+				  var doraemon = iframe.contentWindow.document;
+				   var elements = ["face", "lefteye", "righteye", "base_white", "mouth", "nose", "leftblackeye", "rightblackeye"];
+				   for (var el in elements) {
+				     var element =  '$el-rounded-border';
+				     InputElement input = document.query('#$element');
+				     var borderVal = input.value;
+				     input = document.query('#$element-value');
+				     input.text = borderVal;
+				     var faceEl = doraemon.query('#$el');
+				     faceEl.style.borderRadius =  '${borderVal}px';
+				   }
+				 }   				
             </script>
           </section> 
         </div>
-
+		-->
 
         <div class="slide styling" id="css-gradients">
           <style>
