@@ -719,7 +719,7 @@ header {
           </style>
           <header><span class="css">CSS</span> <h1>Columns</h1></header>
           <section>
-            <pre>-webkit-<b>column-count</b>: <span id="columns-no-value">2</span>; <input type="range" min="1" max="6" value="2" onchange="changeColumnNoSlider(event)">
+            <pre>-webkit-<b>column-count</b>: <span id="columns-no-value">2</span>; <input id="cco-range" type="range" min="1" max="6" value="2">
 -webkit-<b>column-rule</b>: 1px solid #bbb;
 -webkit-<b>column-gap</b>: 2em;</pre>
 
@@ -765,14 +765,19 @@ header {
             </div>
           </section>
 
-          <script defer>
-            function changeColumnNoSlider(event) {
-              var val = event.target.value;
-              document.getElementById('columns-no-value').textContent = val;
-              var el = document.getElementById('columns-no-example');
-              el.style.webkitColumnCount = val;
-              el.style.MozColumnCount = val;
-            }
+          <script type="application/dart" defer>
+              #import('dart:html');
+              
+			 main(){
+			    document.query('#cco-range').on.change.add((event) {
+			      InputElement input = event.target;
+			      var value = input.valueAsNumber.toInt().toString();
+			      document.query('#columns-no-value').text = value;
+			      var el = document.query('#columns-no-example');
+			      el.style.columnCount = value;
+			    });
+			 }	
+
           </script>
         </div>
 
