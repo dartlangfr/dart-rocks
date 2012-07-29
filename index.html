@@ -858,8 +858,8 @@ header {
               }
             </style>
 
-<pre>  color: <b>rgba</b>(255, 0, 0, <span id="opacity-color-value">0.75</span>); <input id="opacity-color" type="range" min="0" max="100" value="75" onchange="changeOpacity()">
-  background: <b>rgba</b>(0, 0, 255, <span id="opacity-background-value">0.75</span>); <input id="opacity-background" type="range" min="0" max="100" value="75" onchange="changeOpacity()">
+<pre>  color: <b>rgba</b>(255, 0, 0, <span id="opacity-color-value">0.75</span>); <input id="opacity-color" type="range" min="0" max="100" value="75">
+  background: <b>rgba</b>(0, 0, 255, <span id="opacity-background-value">0.75</span>); <input id="opacity-background" type="range" min="0" max="100" value="75">
 </pre>
 
             <div id="opacity-body">
@@ -868,21 +868,28 @@ header {
               </div>
             </div>
 
-            <script defer>
-              function changeOpacity() {
-                var textOpacity = (document.getElementById('opacity-color').value / 100).toFixed(2);
-                var backgroundOpacity = (document.getElementById('opacity-background').value / 100).toFixed(2);
-
-                var el = document.getElementById('opacity-example');
-
-                el.style.color = 'rgba(255, 0, 0, ' + textOpacity + ')';
-                el.style.background = 'rgba(0, 0, 255, ' + backgroundOpacity + ')';
-
-                document.getElementById('opacity-color-value').textContent = textOpacity;
-                document.getElementById('opacity-background-value').textContent = backgroundOpacity;
+            <script type="application/dart" defer>
+              #import('dart:html');
+              
+              main(){
+				  document.query('#opacity-color').on.change.add(changeOpacity);
+				  document.query('#opacity-background').on.change.add(changeOpacity); 
               }
-
-              changeOpacity();
+              
+				void changeOpacity(Event e){
+				  InputElement inputColor = document.query('#opacity-color');
+				  var textOpacity = inputColor.valueAsNumber / 100;
+				  InputElement inputBackground = document.query('#opacity-background');
+				  var backgroundOpacity = inputBackground.valueAsNumber / 100;
+				  var el = document.query('#opacity-example');
+				
+				  el.style.color = 'rgba(255, 0, 0, $textOpacity)';
+				  el.style.background = 'rgba(0, 0, 255, $backgroundOpacity)';
+				
+				  document.query('#opacity-color-value').text = textOpacity.toString();
+				  document.query('#opacity-background-value').text = backgroundOpacity.toString();
+				}              
+              
             </script>
           </section>
 
