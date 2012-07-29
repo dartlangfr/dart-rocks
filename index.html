@@ -678,16 +678,23 @@ header {
                 A long cold winter delayed the blossoming of the millions of cherry, apricot, peach, and prune plum trees covering hundreds of square miles of the Valley floor. Then, unlike many years, the rains that followed were light and too early to knock the blossoms from their branches.
               </div>
             </div>
-            <input type="range" min="0" max="100" value="95" onchange="changeWrapping(event)">
+            <input id="tw-range" type="range" min="0" max="100" value="95">
             <p class="center">
               Play with the slider on this and further pages!
             </p>
           </section>
 
-          <script defer>
-            function changeWrapping(event) {
-              document.getElementById('wrapping').style.width = event.target.value + '%';
-            }
+          <script type="application/dart" defer>
+          	 #import('dart:html');
+          	 
+          	 main(){
+				  document.query('#tw-range').on.change.add((event) {
+				    InputElement input =  event.target;
+				    num value = input.valueAsNumber;
+				    document.query('#wrapping').style.width = '$value%';
+				  }); 
+          	 }	
+          
           </script>
         </div>
 
