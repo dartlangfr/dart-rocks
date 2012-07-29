@@ -6,14 +6,6 @@ final int SPACE_KEY_CODE = 32;
 final int ZERO_KEY_CODE = 48;
 
 void main(){
-  //document.query('#tw-range').on.change.add((e) => document.query('#wrapping').style.width = '$e.target.value%');
-  /*
-  document.query('#tw-range').on.change.add((event) {
-    InputElement input =  event.target;
-    num value = input.valueAsNumber;
-    document.query('#wrapping').style.width = '$value%';
-  });  
-  */
   Slides slides = new Slides();
   slides.start();
   // Keybord 

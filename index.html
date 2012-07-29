@@ -792,19 +792,24 @@ header {
         <pre>div {
   -webkit-<b>text-fill-color</b>: black;
   -webkit-<b>text-stroke-color</b>: red;
-  -webkit-<b>text-stroke-width</b>: <span id="text-stroke-value">0.00</span>px; <input id="text-stroke" type="range" min="0" max="50" value="0" onchange="changeTextStroke()">
+  -webkit-<b>text-stroke-width</b>: <span id="text-stroke-value">0.00</span>px; <input id="text-stroke" type="range" min="0" max="50" value="0">
 }</pre>
 
             <div id="text-stroke-example" class="example">
               Text stroke example
             </div>
 
-            <script defer>
-              function changeTextStroke() {
-                var width = (document.getElementById('text-stroke').value * 0.25).toFixed(2);
-                document.getElementById('text-stroke-example').style.webkitTextStrokeWidth = width + 'px';
-                document.getElementById('text-stroke-value').textContent = width;
-              }
+            <script type="application/dart" defer>
+              #import('dart:html');
+              
+              main(){
+				  InputElement input = document.query('#text-stroke');
+				  input.on.change.add((event) {
+				    var width = input.valueAsNumber * 0.25;
+				    document.query('#text-stroke-example').style.textStrokeWidth = '${width}px';
+				    document.query('#text-stroke-value').text = width.toString();
+				  });
+              }	
             </script>
           </section>
         </div>
