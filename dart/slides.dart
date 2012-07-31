@@ -5,6 +5,7 @@ final int RIGHT_KEY_CODE = 39;
 final int SPACE_KEY_CODE = 32;
 final int ZERO_KEY_CODE = 48;
 
+
 void main(){
   Slides slides = new Slides();
   slides.start();
@@ -39,6 +40,7 @@ class Slides {
   static final List<String> _PREVIOUS_CLASSES = const ['past', 'far-past', 'distant-slide'];
   static final List<String> _NEXT_CLASSES =  const ['future', 'far-future', 'distant-slide'];
   //static final String START_TOKEN = '#landing-slide';
+  static final String _SUMMARY = "table-of-contents";
   
   static final SLIDE_CLASSES = const['distant-slide', 'far-past', 'past', 'current', 'future', 'far-future', 'distant-slide'];
   static final int DISTANCE = 3;
@@ -62,9 +64,10 @@ class Slides {
   }
   
   _bindClick(){
-    document.query("#nav-next").on.click.add((e) => next());
-    document.query("#nav-prev").on.click.add((e) => previous());
-    document.query("#nav-help").on.click.add((e) => toggleHelp());
+    document.query('#nav-next').on.click.add((e) => next());
+    document.query('#nav-prev').on.click.add((e) => previous());
+    document.query('#nav-help').on.click.add((e) => toggleHelp());
+    document.query('#nav-toc').on.click.add((e) => goId(_SUMMARY));
   }
   
   _buildSummary(){
