@@ -1,25 +1,21 @@
-#import('dart:html');
-
-final int LEFT_KEY_CODE = 37;
-final int RIGHT_KEY_CODE = 39;
-final int SPACE_KEY_CODE = 32;
-final int ZERO_KEY_CODE = 48;
-
+import 'dart:html';
+import 'dart:math' as Math;
 
 void main(){
   Slides slides = new Slides();
   slides.start();
   // Keybord 
-  window.on.keyDown.add((KeyboardEvent event) {
+  window.onKeyDown.listen((KeyboardEvent e) {
+    var event = new KeyEvent(e);
     switch(event.keyCode){
-      case RIGHT_KEY_CODE:
-      case SPACE_KEY_CODE:
+      case KeyCode.RIGHT:
+      case KeyCode.SPACE:
         slides.next();
         break;
-      case LEFT_KEY_CODE:
+      case KeyCode.LEFT:
         slides.previous();
         break;
-      case ZERO_KEY_CODE:
+      case KeyCode.NUM_ZERO:
         slides.toggleHelp();
         break;
     }
@@ -46,15 +42,16 @@ class Slides {
   static final int DISTANCE = 3;
       
   start(){
+    _loadSlides();
     // Init
     _currentPosition = 0;
-    _slides = document.queryAll('.slide');
+    _slides = queryAll('.slide');
     _slidesNumbers = _slides.length;
-    _counterBackground = document.query('#presentation-counter');
-    _counterButton = document.query("#slide-no");
-    document.query('.slides').style.display = 'block';
-    _slides.forEach((element) => element.classes.add(SLIDE_CLASSES.last()));
-    _help = document.query('#help');
+    _counterBackground = query('#presentation-counter');
+    _counterButton = query("#slide-no");
+    query('.slides').style.display = 'block';
+    _slides.forEach((element) => element.classes.add(SLIDE_CLASSES.last));
+    _help = query('#help');
     // Summary
     _buildSummary();
     // Mouse binding
@@ -64,23 +61,23 @@ class Slides {
   }
   
   _bindClick(){
-    document.query('#nav-next').on.click.add((e) => next());
-    document.query('#nav-prev').on.click.add((e) => previous());
-    document.query('#nav-help').on.click.add((e) => toggleHelp());
-    document.query('#nav-toc').on.click.add((e) => goId(_SUMMARY));
+    query('#nav-next').onClick.listen((e) => next());
+    query('#nav-prev').onClick.listen((e) => previous());
+    query('#nav-help').onClick.listen((e) => toggleHelp());
+    query('#nav-toc').onClick.listen((e) => goId(_SUMMARY));
   }
   
   _buildSummary(){
-    List<Element> transitionSlides = document.queryAll('.transitionSlide');
+    List<Element> transitionSlides = queryAll('.transitionSlide');
     StringBuffer buffer = new StringBuffer();
     transitionSlides.forEach((e) {
       ImageElement img = e.query('img');
-      buffer.add('<li><a data-hash="${e.id}">${e.query('h2').innerHTML}</a>'); 
-      buffer.add('<img src="${img.src.replaceAll('_64', '_32')}"></li>'); 
+      buffer.write('<li><a data-hash="${e.id}">${e.query('h2').innerHtml}</a>'); 
+      buffer.write('<img src="${img.src.replaceAll('_64', '_32')}"></li>'); 
     });
-    Element tocList =  document.query('#toc-list');
-    tocList.innerHTML = buffer.toString();
-    tocList.queryAll('li a').forEach((element) => element.on.click.add((event) => goId(element.dataset['hash'])));
+    Element tocList =  query('#toc-list');
+    tocList.innerHtml = buffer.toString();
+    tocList.queryAll('li a').forEach((element) => element.onClick.listen((event) => goId(element.dataset['hash'])));
   }
   
   next(){
@@ -110,8 +107,8 @@ class Slides {
     window.location.hash = '#${_currentToken}';
     // Display current position
     var displayPosition =  (_currentPosition + 1).toString();
-    _counterBackground.innerHTML = displayPosition;
-    _counterButton.innerHTML = displayPosition;
+    _counterBackground.innerHtml = displayPosition;
+    _counterButton.innerHtml = displayPosition;
     // Change slide classes
     var from = Math.max(_currentPosition-DISTANCE, 0);
     var to = Math.min(_currentPosition+DISTANCE, _slidesNumbers-1);
@@ -127,7 +124,7 @@ class Slides {
   }
   
   goId(String id){
-    List<Element> elements = _slides.filter((e) => e.id == id);
+    List<Element> elements = _slides.where((e) => e.id == id);
     if(elements.length == 1){
       int index = _slides.indexOf(elements[0]);
       // Neighboorhound become distant
@@ -139,11 +136,104 @@ class Slides {
           _slides[i].classes.remove(SLIDE_CLASSES[lastValueIndex]);
         }
         // Add
-        _slides[i].classes.add(SLIDE_CLASSES.last());
+        _slides[i].classes.add(SLIDE_CLASSES.last);
       }
       // go
       goPosition(index, 0);
     }
   }
+  
+  _loadSlides(){
+   _loadLocalStorageMessage(); 
+   _textWrapping();
+   _cssColumns();
+   _cssStroke();
+   _cssOpacity();
+  }
+  
+  _loadLocalStorageMessage(){
+    TextAreaElement area = query('#ta');
+    if(area.value.isEmpty){
+      area.value = window.localStorage.$dom_getItem('value');
+    }
+    query('#save-ta').onClick.listen((e) {
+      window.localStorage['value'] = area.value;
+      var now = new DateTime.now();
+      window.localStorage['timestamp'] = now.millisecondsSinceEpoch.toString();
+    });
+  }
+
+  _textWrapping(){
+    query('#tw-range').onChange.listen((event) {
+      InputElement input =  event.target;
+      num value = input.valueAsNumber;
+      query('#wrapping').style.width = '$value%';
+    });    
+  }  
+  
+  _cssColumns(){
+    query('#cco-range').onChange.listen((event) {
+      InputElement input = event.target;
+      var value = input.valueAsNumber.toInt().toString();
+      query('#columns-no-value').text = value;
+      var el = query('#columns-no-example');
+      el.style.columnCount = value;
+    }); 
+   }
+  
+  _cssStroke(){
+    InputElement input = query('#text-stroke');
+    input.onChange.listen((event) {
+      var width = input.valueAsNumber * 0.25;
+      query('#text-stroke-example').style.textStrokeWidth = '${width}px';
+      query('#text-stroke-value').text = width.toString();
+    });
+  }
+    
+    _cssOpacity(){
+      query('#opacity-color').onChange.listen((e) => _changeCssOpacity(e));
+      query('#opacity-background').onChange.listen(_changeCssOpacity); 
+    }
+    
+  _changeCssOpacity(Event e){
+      InputElement inputColor = query('#opacity-color');
+      var textOpacity = inputColor.valueAsNumber / 100;
+      InputElement inputBackground = query('#opacity-background');
+      var backgroundOpacity = inputBackground.valueAsNumber / 100;
+      var el = query('#opacity-example');
+      
+      el.style.color = 'rgba(255, 0, 0, $textOpacity)';
+      el.style.background = 'rgba(0, 0, 255, $backgroundOpacity)';
+      
+      query('#opacity-color-value').text = textOpacity.toString();
+      query('#opacity-background-value').text = backgroundOpacity.toString();
+  }
+  
+  _cssColor(){
+    query('#hsl-h').onChange.listen(changeHSL);
+    query('#hsl-s').onChange.listen(changeHSL);
+    query('#hsl-l').onChange.listen(changeHSL);
+    query('#hsl-a').onChange.listen(changeHSL);              
+  }
+  
+ changeHSL(Event e) {
+   InputElement input;
+   input = query('#hsl-h');
+   var h = (input.valueAsNumber * 1.0).toInt();
+   input = query('#hsl-s');
+   var s = (input.valueAsNumber * 1.0).toInt();
+   input = query('#hsl-l');
+   var l = (input.valueAsNumber * 1.0).toInt();
+   input = query('#hsl-a');
+   var a = input.valueAsNumber / 100;
+   var el = query('#hsl-example');
+   
+   el.style.color = 'hsla($h, $s%, $l%, $a)';
+   
+   query('#hsl-h-value').text = '$h';
+   query('#hsl-s-value').text = '$s%,';
+   query('#hsl-l-value').text = '$l%,';
+   query('#hsl-a-value').text = '$a);';
+ }   
   
 }

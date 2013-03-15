@@ -1,0 +1,10 @@
+name: Dart_Rocks
+version: 0.1.0-dev
+author: Nicolas François
+description: A Dart version of http://slides.html5rocks.com/
+dependencies:
+  browser: any
+
+#dependencies:
+#  js: any
+#  unittest: any

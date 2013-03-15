@@ -156,7 +156,7 @@
               <li><span class="year"><em class="stroke">2002</em></span> <span class="css">Tableless Web Design</span></li>
               <li><span class="year"><em class="stroke">2005</em></span> <span class="dart">AJAX</span></li>
               <li><span class="year"><em class="stroke">2009</em></span> <span class="html">HTML 5</span></li>
-              <li><span class="year"><em class="stroke">2012</em></span> <span class="dart">Dart M1</span></li>
+              <li><span class="year"><em class="stroke">2013</em></span> <span class="dart">Dart 1.0</span></li>
             </ul>
           </section>
         </div>        
@@ -222,32 +222,10 @@
           </style>
           <header><span class="dart">Dart</span> <h1>Web Storage</h1></header>
           <section>
-			<pre>
-// use localStorage for persistent storage
-// use sessionStorage for per tab storage
-saveButton.on.click.add((e) {
-  window.<b>localStorage</b>.<b>$dom_setItem</b>('value', area.value);
-}, false);
-area.value = window.<b>localStorage</b>.<b>$dom_getItem</b>('value');
-			</pre>
             <p id="localstorage-message">Save text value on the client side (crash-safe)</p>
             <textarea id="ta" placeholder="Type your text here..."></textarea>
             <button id="save-ta">Save</button>
             <p id="ta-log"></p>
-            <script type="application/dart" defer>
-            	#import('dart:html');
-            	
-                main(){
-				  TextAreaElement area = document.query('#ta');
-				  if(area.value.isEmpty()){
-				    area.value = window.localStorage.$dom_getItem('value');
-				  }
-				  document.query('#save-ta').on.click.add((e) {
-				    window.localStorage.$dom_setItem('value', area.value);
-				    window.localStorage.$dom_setItem('timestamp', (new Date.now()).millisecondsSinceEpoch.toString());
-				  }, false);
-            	}
-            </script>
           </section>
         </div> 
         
@@ -685,19 +663,6 @@ header {
               Play with the slider on this and further pages!
             </p>
           </section>
-
-          <script type="application/dart" defer>
-          	 #import('dart:html');
-          	 
-          	 main(){
-				  document.query('#tw-range').on.change.add((event) {
-				    InputElement input =  event.target;
-				    num value = input.valueAsNumber;
-				    document.query('#wrapping').style.width = '$value%';
-				  }); 
-          	 }	
-          
-          </script>
         </div>
 
 
@@ -767,20 +732,6 @@ header {
             </div>
           </section>
 
-          <script type="application/dart" defer>
-              #import('dart:html');
-              
-			 main(){
-			    document.query('#cco-range').on.change.add((event) {
-			      InputElement input = event.target;
-			      var value = input.valueAsNumber.toInt().toString();
-			      document.query('#columns-no-value').text = value;
-			      var el = document.query('#columns-no-example');
-			      el.style.columnCount = value;
-			    });
-			 }	
-
-          </script>
         </div>
 
 
@@ -806,18 +757,6 @@ header {
               Text stroke example
             </div>
 
-            <script type="application/dart" defer>
-              #import('dart:html');
-              
-              main(){
-				  InputElement input = document.query('#text-stroke');
-				  input.on.change.add((event) {
-				    var width = input.valueAsNumber * 0.25;
-				    document.query('#text-stroke-example').style.textStrokeWidth = '${width}px';
-				    document.query('#text-stroke-value').text = width.toString();
-				  });
-              }	
-            </script>
           </section>
         </div>
 
@@ -869,30 +808,6 @@ header {
                 Independent opacity
               </div>
             </div>
-
-            <script type="application/dart" defer>
-              #import('dart:html');
-              
-              main(){
-				  document.query('#opacity-color').on.change.add(changeOpacity);
-				  document.query('#opacity-background').on.change.add(changeOpacity); 
-              }
-              
-				void changeOpacity(Event e){
-				  InputElement inputColor = document.query('#opacity-color');
-				  var textOpacity = inputColor.valueAsNumber / 100;
-				  InputElement inputBackground = document.query('#opacity-background');
-				  var backgroundOpacity = inputBackground.valueAsNumber / 100;
-				  var el = document.query('#opacity-example');
-				
-				  el.style.color = 'rgba(255, 0, 0, $textOpacity)';
-				  el.style.background = 'rgba(0, 0, 255, $backgroundOpacity)';
-				
-				  document.query('#opacity-color-value').text = textOpacity.toString();
-				  document.query('#opacity-background-value').text = backgroundOpacity.toString();
-				}              
-              
-            </script>
           </section>
 
         </div>
@@ -925,38 +840,6 @@ header {
             <div id="hsl-example" class="example">
               HSL example
             </div>
-
-            <script type="application/dart" defer>
-              #import('dart:html');
-              
-              main(){
-				  document.query('#hsl-h').on.change.add(changeHSL);
-				  document.query('#hsl-s').on.change.add(changeHSL);
-				  document.query('#hsl-l').on.change.add(changeHSL);
-				  document.query('#hsl-a').on.change.add(changeHSL);              
-              }
-              
-			changeHSL(Event e) {
-			  InputElement input;
-			  input = document.query('#hsl-h');
-			  var h = (input.valueAsNumber * 1.0).toInt();
-			  input = document.query('#hsl-s');
-			  var s = (input.valueAsNumber * 1.0).toInt();
-			  input = document.query('#hsl-l');
-			  var l = (input.valueAsNumber * 1.0).toInt();
-			  input = document.query('#hsl-a');
-			  var a = input.valueAsNumber / 100;
-			  var el = document.query('#hsl-example');
-			  
-			  el.style.color = 'hsla($h, $s%, $l%, $a)';
-			  
-			  document.query('#hsl-h-value').text = '$h';
-			  document.query('#hsl-s-value').text = '$s%,';
-			  document.query('#hsl-l-value').text = '$l%,';
-			  document.query('#hsl-a-value').text = '$a);';
-			}                
-
-            </script>
           </section>
         </div>
 
