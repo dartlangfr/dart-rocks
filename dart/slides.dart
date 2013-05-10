@@ -150,6 +150,7 @@ class Slides {
    _cssColor();
    _roundedCorners();
    _cssGradient();
+   _cssShadow();
   }
   
   _loadLocalStorageMessage(){
@@ -267,6 +268,40 @@ class Slides {
       query('#gradients-radial-value').text = size;
       
     });
+    
+  }
+  
+  _cssShadow(){
+    query('#shadows-text-x').onChange.listen(_changeShadow);
+    query('#shadows-text-y').onChange.listen(_changeShadow);
+    query('#shadows-text-size').onChange.listen(_changeShadow);
+    query('#shadows-box-x').onChange.listen(_changeShadow);     
+    query('#shadows-box-y').onChange.listen(_changeShadow);   
+    query('#shadows-box-size').onChange.listen(_changeShadow);   
+  }
+  
+  _changeShadow(e){
+    var el = document.getElementById('shadow-example');
+
+    var textXVal = (query('#shadows-text-x') as InputElement).value;
+    var textYVal = (query('#shadows-text-y') as InputElement).value;
+    var textSizeVal = (query('#shadows-text-size') as InputElement).value;
+
+    query('#shadows-text-x-value').text = textXVal;
+    query('#shadows-text-y-value').text = textYVal;
+    query('#shadows-text-size-value').text = textSizeVal;
+
+    var boxXVal = (query('#shadows-box-x') as InputElement).value;
+    var boxYVal = (query('#shadows-box-y') as InputElement).value;
+    var boxSizeVal = (query('#shadows-box-size') as InputElement).value;
+
+    query('#shadows-box-x-value').text = boxXVal;
+    query('#shadows-box-y-value').text = boxYVal;
+    query('#shadows-box-size-value').text = boxSizeVal;
+
+    el.style.textShadow = 'rgba(64, 64, 64, 0.5)  ${textXVal}px ${textYVal}px ${textSizeVal}px';
+    el.style.boxShadow = 'rgba(0, 0, 128, 0.25) ${boxXVal}px ${boxYVal}px ${boxSizeVal}px';
+    //el.style.MozBoxShadow = 'rgba(0, 0, 128, 0.25) ${boxXVal}px ${boxYVal}px ${boxSizeVal}px';    
   }
  
 }
