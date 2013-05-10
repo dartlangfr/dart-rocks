@@ -1083,7 +1083,6 @@ header {
             </div>
           </section> 
         </div>
-		<!--
         <div class="slide styling" id="css-gradients">
           <style>
             #gradients-linear-example {
@@ -1109,23 +1108,14 @@ header {
             <div id="gradients-linear-example" class="example"></div>
 <br />
 <pre>background: -webkit-gradient(<b>radial</b>, 430 50, 0, 430 50, <span id="gradients-radial-value">200</span>, from(red), to(#000))
-                                                        <input id="gradients-radial" type="range" min="1" max="800" value="200" onchange="changeGradients(event)">
+                                                        <input id="gradients-radial" type="range" min="1" max="800" value="200" >
 </pre>
             <div id="gradients-radial-example" class="example"></div>
 
-            <script defer>
-              function changeGradients() {
-                var size = document.getElementById('gradients-radial').value;
-
-                document.getElementById('gradients-radial-example').style.background = 
-                    '-webkit-gradient(radial, 430 50, 0, 430 50, ' + size + ', from(red), to(#000))';
-
-                document.getElementById('gradients-radial-value').textContent = size;
-              }
-            </script>
           </section>
         </div>
 
+		<!--
         <div class="slide styling" id="css-shadow">
           <style>
             #shadow-example {

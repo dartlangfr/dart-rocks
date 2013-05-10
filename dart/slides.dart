@@ -149,6 +149,7 @@ class Slides {
    _cssOpacity();
    _cssColor();
    _roundedCorners();
+   _cssGradient();
   }
   
   _loadLocalStorageMessage(){
@@ -257,6 +258,15 @@ class Slides {
      final faceEl = query('#$el');
      faceEl.style.borderRadius =  '${borderVal}px';
    }
-  }  
+  } 
+  
+  _cssGradient(){
+    query("#gradients-radial").onChange.listen((e) {
+      var size = (query('#gradients-radial') as InputElement).value;
+      query('#gradients-radial-example').style.background = '-webkit-gradient(radial, 430 50, 0, 430 50, $size, from(red), to(#000))';
+      query('#gradients-radial-value').text = size;
+      
+    });
+  }
  
 }
