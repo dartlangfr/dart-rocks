@@ -829,13 +829,13 @@ header {
             }
           </style>
           <header><span class="css">CSS</span> <h1>Hue/saturation/luminance color</h1></header>
-          <section>
-        <pre>color: <b>hsla</b>(
-  <span class="hsl-value" id="hsl-h-value">128</span> <input id="hsl-h" type="range" min="0" max="360" value="128" >
-  <span class="hsl-value" id="hsl-s-value">74%</span> <input id="hsl-s" type="range" min="0" max="100" value="75" >
-  <span class="hsl-value" id="hsl-l-value">33%</span> <input id="hsl-l" type="range" min="0" max="100" value="33" >
-  <span class="hsl-value" id="hsl-a-value">1.00</span> <input id="hsl-a" type="range" min="0" max="100" value="100" >
-        </pre>
+              <section>
+                <pre>color: <b>hsla</b>(
+                <span class="hsl-value" id="hsl-h-value">128</span> <input id="hsl-h" type="range" min="0" max="360" value="128" >
+                <span class="hsl-value" id="hsl-s-value">74%</span> <input id="hsl-s" type="range" min="0" max="100" value="75" >
+                <span class="hsl-value" id="hsl-l-value">33%</span> <input id="hsl-l" type="range" min="0" max="100" value="33" >
+                <span class="hsl-value" id="hsl-a-value">1.00</span> <input id="hsl-a" type="range" min="0" max="100" value="100" >
+                </pre>
 
             <div id="hsl-example" class="example">
               HSL example
@@ -843,66 +843,246 @@ header {
           </section>
         </div>
 
-		<!--
          <div class="slide styling" id="rounded-corners">
           <style>
           #doraemon {
             height: 320px;
           }
-          #doraemon iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
+
+          #instr{
+              float:right;
+              width:400px;
+              font-size:14px;
+              border-left:2px solid black;
+              padding-left:20px;
           }
+          
+          #face{
+              position:relative;
+              width:310px;
+              height:300px;
+              background:#07beea;
+              border:#333 2px solid;
+              margin: auto;
+          }
+          
+          #base{
+              position:relative;
+              top:-5px;
+          }
+          
+          #base_white{
+              position:absolute;
+              border:#000 2px solid;
+              width:264px;
+              height:196px;
+              background:#FFF;
+              z-index:1;
+              top:85px;
+              left:22px;
+          }
+          
+          #eyes{
+              position:relative;
+              top:-5px;
+          }
+          
+          div.eye{
+              position:absolute;
+              border:2px solid #000;
+              width:72px;
+              height:83px;
+              z-index:20;
+              background:#fff;
+          }
+          
+          div.black_eye{
+              position:absolute;
+              width:15px;
+              height:15px;
+              background:#333;
+              z-index:21;
+          }
+          
+          div.black_left{
+              top:100px;
+              left:130px;
+          }
+          
+          div.black_right{
+              top:100px;
+              left:170px;
+          }
+          
+          div.eye_left{
+              top:45px;
+              left:82px;
+          }
+          
+          div.eye_right{
+              top:45px;
+              left:156px;
+          }
+          
+          #nose{
+              width:32px;
+              height:32px;
+              border:2px solid #000;
+              background:#c93e00;
+              position:absolute;
+              top:117px;
+              left:139px;
+              z-index:30;
+          }
+          
+          #nose_light{
+              width:10px;
+              height:10px;
+              border-radius:5px;
+              -webkit-border-radius:5px;
+              -moz-border-radius:5px;
+              position:relative;
+              top:0px;
+              left:0px;
+          }
+          
+          #nose_line{
+              background:#000;
+              width:4px;
+              height:100px;
+              top:125px;
+              left:156px;
+              position:absolute;
+          }
+          
+          #nose_line{
+              background:#333;
+              width:3px;
+              height:100px;
+              top:140px;
+              left:155px;
+              position:absolute;
+              z-index:20;
+          }
+          #mouth{
+              width:240px;
+              border-bottom:3px solid #333;
+              position:absolute;
+              top:240px;
+              left:36px;
+              z-index:10;
+          }
+          
+          #mouth_rewrite{
+              background:#fff;
+              width:240px;
+              height:90px;
+              position:relative;
+              top:115px;
+              left:35px;
+              z-index:12;
+              border-radius:45px;
+              -webkit-border-radius:45px;
+              -moz-border-radius:60px;
+          }
+          
+          #firefox_mouth, x:-moz-broken, x:last-of-type, x:indeterminate {
+              position:relative;
+              width:170px;
+              height:150px;
+              -moz-border-radius:85px;
+              border:3px solid #000;
+              background:#FFF;
+              z-index:11;
+              top:-3px;
+              left:70px;
+          }
+          .whiskers{
+              background:#333;
+              height:2px;
+              width:60px;
+              position:absolute;
+              z-index:20;
+          }
+          .whi_right{
+              top:165px;
+              left:210px;
+          }
+          
+          .whi_right_top{
+              top:145px;
+              left:210px;
+          }
+          
+          .whi_right_bottom{
+              top:185px;
+              left:210px;
+          }
+          
+          .whi_left{
+              top:165px;
+              left:50px;
+          }
+          .whi_left_top{
+              top:145px;
+              left:50px;
+          }
+          
+          .whi_left_bottom{
+              top:185px;
+              left:50px;
+          }
+          /*
+          */
+          
           </style>
           <header><span class="css">CSS</span> <h1>Rounded corners</h1></header>
           <section>
             <pre>
-              face: <b>border-radius</b>: <span id="face-rounded-border-value">0</span>px; <input id="face-rounded-border" type="range" min="0" max="146" value="0" >
-              left eye: <b>border-radius</b>: <span id="lefteye-rounded-border-value">0</span>px; <input id="lefteye-rounded-border" type="range" min="0" max="35" value="0" >
-              right eye: <b>border-radius</b>: <span id="righteye-rounded-border-value">0</span>px; <input id="righteye-rounded-border" type="range" min="0" max="35" value="0" >
-              base white: <b>border-radius</b>: <span id="base_white-rounded-border-value">0</span>px; <input id="base_white-rounded-border" type="range" min="0" max="150" value="0" >
-              mouth: <b>border-radius</b>: <span id="mouth-rounded-border-value">0</span>px; <input id="mouth-rounded-border" type="range" min="0" max="120" value="0" >
-              nose: <b>border-radius</b>: <span id="nose-rounded-border-value">0</span>px; <input id="nose-rounded-border" type="range" min="0" max="50" value="0" >
-              left black eye: <b>border-radius</b>: <span id="leftblackeye-rounded-border-value">0</span>px; <input id="leftblackeye-rounded-border" type="range" min="0" max="35" value="0" >
-              right black eye: <b>border-radius</b>: <span id="rightblackeye-rounded-border-value">0</span>px; <input id="rightblackeye-rounded-border" type="range" min="0" max="35" value="0" >
+              face: <b>border-radius</b>: <span id="face-rounded-border-value">0</span>px; <input id="face-rounded-border" type="range" min="0" max="146" value="0">
+              left eye: <b>border-radius</b>: <span id="lefteye-rounded-border-value">0</span>px; <input id="lefteye-rounded-border" type="range" min="0" max="35" value="0">
+              right eye: <b>border-radius</b>: <span id="righteye-rounded-border-value">0</span>px; <input id="righteye-rounded-border" type="range" min="0" max="35" value="0">
+              base white: <b>border-radius</b>: <span id="base_white-rounded-border-value">0</span>px; <input id="base_white-rounded-border" type="range" min="0" max="150" value="0">
+              mouth: <b>border-radius</b>: <span id="mouth-rounded-border-value">0</span>px; <input id="mouth-rounded-border" type="range" min="0" max="120" value="0">
+              nose: <b>border-radius</b>: <span id="nose-rounded-border-value">0</span>px; <input id="nose-rounded-border" type="range" min="0" max="50" value="0">
+              left black eye: <b>border-radius</b>: <span id="leftblackeye-rounded-border-value">0</span>px; <input id="leftblackeye-rounded-border" type="range" min="0" max="35" value="0">
+              right black eye: <b>border-radius</b>: <span id="rightblackeye-rounded-border-value">0</span>px; <input id="rightblackeye-rounded-border" type="range" min="0" max="35" value="0">
             </pre>
             <div id="doraemon" class="example">
-              <iframe _src="src/rounded/write_doraemon.html" src="src/rounded/write_doraemon.html"></iframe>
+              <div id="doraemon-container">
+                <div id="doraemon">
+                  <div id="face">
+                      <div id="eyes">
+                          <div id="lefteye" class="eye eye_left"></div>
+                          <div id="leftblackeye" class="black_eye black_left"></div>
+                  
+                          <div id="righteye" class="eye eye_right"></div>
+                          <div id="rightblackeye" class="black_eye black_right"></div>
+                      </div>
+                      <div id="base">
+                          <div id="base_white"></div>
+                          <div id="nose">
+                              <div id="nose_light"></div>
+                          </div>
+                          <div id="nose_line"></div>
+                          <div id="mouth"></div>
+                          <div id="mouth_rewrite"></div>
+                          <div id="firefox_mouth"></div>
+                  
+                          <div class="whiskers whi_right_top rotate160"></div>
+                          <div class="whiskers whi_right"></div>
+                          <div class="whiskers whi_right_bottom rotate20"></div>
+                  
+                          <div class="whiskers whi_left_top rotate20"></div>
+                          <div class="whiskers whi_left"></div>
+                          <div class="whiskers whi_left_bottom rotate160"></div>
+                      </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <script type="application/dart" defer>
-            	#import('dart:html');
-            
-   				void main(){
-				  document.query('#face-rounded-border').on.change.add(handleCorner);
-				  document.query('#lefteye-rounded-border').on.change.add(handleCorner);
-				  document.query('#righteye-rounded-border').on.change.add(handleCorner);
-				  document.query('#base_white-rounded-border').on.change.add(handleCorner);
-				  document.query('#mouth-rounded-border').on.change.add(handleCorner);
-				  document.query('#nose-rounded-border').on.change.add(handleCorner);
-				  document.query('#leftblackeye-rounded-border').on.change.add(handleCorner);
-				  document.query('#rightblackeye-rounded-border').on.change.add(handleCorner);   				
-   				}
-   				
-				void handleCorner(Event e) {
-				  IFrameElement iframe = document.query('#doraemon iframe');
-				  Window iframeW = iframe.contentWindow;
-				  var doraemon = iframe.contentWindow.document;
-				   var elements = ["face", "lefteye", "righteye", "base_white", "mouth", "nose", "leftblackeye", "rightblackeye"];
-				   for (var el in elements) {
-				     var element =  '$el-rounded-border';
-				     InputElement input = document.query('#$element');
-				     var borderVal = input.value;
-				     input = document.query('#$element-value');
-				     input.text = borderVal;
-				     var faceEl = doraemon.query('#$el');
-				     faceEl.style.borderRadius =  '${borderVal}px';
-				   }
-				 }   				
-            </script>
           </section> 
         </div>
-		-->
 		<!--
         <div class="slide styling" id="css-gradients">
           <style>

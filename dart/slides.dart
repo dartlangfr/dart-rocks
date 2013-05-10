@@ -82,7 +82,7 @@ class Slides {
   
   next(){
     if(_currentPosition < _slidesNumbers-1){
-      goPosition(_currentPosition, +1);
+      goPosition(_currentPosition, 1);
     }
   }
   
@@ -124,24 +124,22 @@ class Slides {
   }
   
   goId(String id){
-    List<Element> elements = _slides.where((e) => e.id == id);
-    if(elements.length == 1){
-      int index = _slides.indexOf(elements[0]);
-      // Neighboorhound become distant
-      var from = Math.max(_currentPosition-DISTANCE, 0);
-      var to = Math.min(_currentPosition+DISTANCE, _slidesNumbers-1); 
-      for(int i = from; i<=to; i++){
-        var lastValueIndex = i-_currentPosition+DISTANCE;
-        if(lastValueIndex >0 && lastValueIndex<SLIDE_CLASSES.length){
-          _slides[i].classes.remove(SLIDE_CLASSES[lastValueIndex]);
-        }
-        // Add
-        _slides[i].classes.add(SLIDE_CLASSES.last);
+    Element element = _slides.firstWhere((e)  => e.id == id);
+    int index = _slides.indexOf(element);
+    // Neighboorhound become distant
+    var from = Math.max(_currentPosition-DISTANCE, 0);
+    var to = Math.min(_currentPosition+DISTANCE, _slidesNumbers-1); 
+    for(int i = from; i<=to; i++){
+      var lastValueIndex = i-_currentPosition+DISTANCE;
+      if(lastValueIndex >0 && lastValueIndex<SLIDE_CLASSES.length){
+        _slides[i].classes.remove(SLIDE_CLASSES[lastValueIndex]);
       }
-      // go
-      goPosition(index, 0);
+      // Add
+      _slides[i].classes.add(SLIDE_CLASSES.last);
     }
-  }
+    // go
+    goPosition(index, 0);
+   }
   
   _loadSlides(){
    _loadLocalStorageMessage(); 
@@ -149,6 +147,8 @@ class Slides {
    _cssColumns();
    _cssStroke();
    _cssOpacity();
+   _cssColor();
+   _roundedCorners();
   }
   
   _loadLocalStorageMessage(){
@@ -210,23 +210,23 @@ class Slides {
   }
   
   _cssColor(){
-    query('#hsl-h').onChange.listen(changeHSL);
-    query('#hsl-s').onChange.listen(changeHSL);
-    query('#hsl-l').onChange.listen(changeHSL);
-    query('#hsl-a').onChange.listen(changeHSL);              
+    query('#hsl-h').onChange.listen(_changeHSL);
+    query('#hsl-s').onChange.listen(_changeHSL);
+    query('#hsl-l').onChange.listen(_changeHSL);
+    query('#hsl-a').onChange.listen(_changeHSL);              
   }
   
- changeHSL(Event e) {
+ _changeHSL(Event e) {
    InputElement input;
    input = query('#hsl-h');
-   var h = (input.valueAsNumber * 1.0).toInt();
+   final h = (input.valueAsNumber * 1.0).toInt();
    input = query('#hsl-s');
-   var s = (input.valueAsNumber * 1.0).toInt();
+   final s = (input.valueAsNumber * 1.0).toInt();
    input = query('#hsl-l');
-   var l = (input.valueAsNumber * 1.0).toInt();
+   final l = (input.valueAsNumber * 1.0).toInt();
    input = query('#hsl-a');
-   var a = input.valueAsNumber / 100;
-   var el = query('#hsl-example');
+   final a = input.valueAsNumber / 100;
+   final el = query('#hsl-example');
    
    el.style.color = 'hsla($h, $s%, $l%, $a)';
    
@@ -234,6 +234,29 @@ class Slides {
    query('#hsl-s-value').text = '$s%,';
    query('#hsl-l-value').text = '$l%,';
    query('#hsl-a-value').text = '$a);';
- }   
-  
+ }
+ 
+ _roundedCorners(){
+   query('#face-rounded-border').onChange.listen(_handleCorner);
+   query('#lefteye-rounded-border').onChange.listen(_handleCorner);
+   query('#righteye-rounded-border').onChange.listen(_handleCorner);
+   query('#base_white-rounded-border').onChange.listen(_handleCorner);
+   query('#mouth-rounded-border').onChange.listen(_handleCorner);
+   query('#nose-rounded-border').onChange.listen(_handleCorner);
+   query('#leftblackeye-rounded-border').onChange.listen(_handleCorner);
+   query('#rightblackeye-rounded-border').onChange.listen(_handleCorner);  
+ }
+
+  _handleCorner(Event e) {
+   final elements = ["face", "lefteye", "righteye", "base_white", "mouth", "nose", "leftblackeye", "rightblackeye"];
+   for (final el in elements) {
+     final element =  '$el-rounded-border';
+     InputElement input = query('#$element');
+     final borderVal = input.value;
+     query('#$element-value').text = borderVal;
+     final faceEl = query('#$el');
+     faceEl.style.borderRadius =  '${borderVal}px';
+   }
+  }  
+ 
 }
