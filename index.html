@@ -1143,35 +1143,9 @@ header {
             </div>
 
           </section>
-
-          <script defer>
-            function changeShadow() {
-              var el = document.getElementById('shadow-example');
-
-              var textXVal = document.getElementById('shadows-text-x').value;
-              var textYVal = document.getElementById('shadows-text-y').value;
-              var textSizeVal = document.getElementById('shadows-text-size').value;
-
-              document.getElementById('shadows-text-x-value').textContent = textXVal;
-              document.getElementById('shadows-text-y-value').textContent = textYVal;
-              document.getElementById('shadows-text-size-value').textContent = textSizeVal;
-
-              var boxXVal = document.getElementById('shadows-box-x').value;
-              var boxYVal = document.getElementById('shadows-box-y').value;
-              var boxSizeVal = document.getElementById('shadows-box-size').value;
-
-              document.getElementById('shadows-box-x-value').textContent = boxXVal;
-              document.getElementById('shadows-box-y-value').textContent = boxYVal;
-              document.getElementById('shadows-box-size-value').textContent = boxSizeVal;
-
-              el.style.textShadow = 'rgba(64, 64, 64, 0.5) ' + textXVal + 'px ' + textYVal + 'px ' + textSizeVal + 'px';
-              el.style.webkitBoxShadow = 'rgba(0, 0, 128, 0.25) ' + boxXVal + 'px ' + boxYVal + 'px ' + boxSizeVal + 'px';
-              el.style.MozBoxShadow = 'rgba(0, 0, 128, 0.25) ' + boxXVal + 'px ' + boxYVal + 'px ' + boxSizeVal + 'px';
-            }
-          </script>
         </div>
 
-		<!--
+
 
         <div class="slide styling" id="logo-demo">
           <style>
@@ -1185,16 +1159,16 @@ header {
           </style>
           <header><span class="css">CSS</span> <h1>Instant Web 2.0 (just add sliders)</h1></header>
           <section>
-            <pre><b>text-shadow</b>: rgba(0, 0, 0, 0.5) 0 <span id="web20-shadow-value-1">0</span>px <span id="web20-shadow-value-2">0</span>px; <input id="web20-shadow" type="range" min="0" max="9" value="0" onchange="changeWeb20(event)">
+            <pre><b>text-shadow</b>: rgba(0, 0, 0, 0.5) 0 <span id="web20-shadow-value-1">0</span>px <span id="web20-shadow-value-2">0</span>px; <input id="web20-shadow" type="range" min="0" max="9" value="0" >
 
 background: 
-  -<b>webkit-gradient</b>(linear, left top, left bottom, <input id="web20-gradient" type="range" min="0" max="100" value="0" onchange="changeWeb20(event)">
+  -<b>webkit-gradient</b>(linear, left top, left bottom, <input id="web20-gradient" type="range" min="0" max="100" value="0" >
                    from(rgba(200, 200, 240, <span id="web20-gradient-value-1">0</span>)), to(rgba(255, 255, 255, <span id="web20-gradient-value-2">0</span>)));
 
-<b>border-radius</b>: <span id="web20-border-value">0</span>px; <input id="web20-border" type="range" min="0" max="50" value="0" onchange="changeWeb20(event)">
+<b>border-radius</b>: <span id="web20-border-value">0</span>px; <input id="web20-border" type="range" min="0" max="50" value="0" >
 
 -webkit-<b>box-reflect</b>: below 10px
-  -webkit-gradient(linear, left top, left bottom, <input id="web20-reflect" type="range" min="0" max="100" value="0" onchange="changeWeb20(event)">
+  -webkit-gradient(linear, left top, left bottom, <input id="web20-reflect" type="range" min="0" max="100" value="0" >
                    from(transparent), to(rgba(255, 255, 255, <span id="web20-reflect-value">0</span>)));
 </pre>
 
@@ -1207,34 +1181,9 @@ background:
             </div>
 
           </section>
-
-          <script defer>
-            function changeWeb20() {
-              var el = document.getElementById('web20-google');
-
-              var textShadowVal = document.getElementById('web20-shadow').value;
-              document.getElementById('web20-shadow-value-1').textContent = textShadowVal;
-              document.getElementById('web20-shadow-value-2').textContent = textShadowVal;
-
-              var gradientVal = document.getElementById('web20-gradient').value / 100;
-              document.getElementById('web20-gradient-value-1').textContent = gradientVal;
-              document.getElementById('web20-gradient-value-2').textContent = gradientVal;
-
-              var borderVal = document.getElementById('web20-border').value;
-              document.getElementById('web20-border-value').textContent = borderVal;
-
-              var reflectVal = document.getElementById('web20-reflect').value / 100;
-              document.getElementById('web20-reflect-value').textContent = reflectVal;
-
-              el.style.textShadow = 'rgba(0, 0, 0, 0.5) 0 ' + textShadowVal + 'px ' + textShadowVal + 'px';
-              el.style.background = '-webkit-gradient(linear, left top, left bottom, from(rgba(200, 200, 240, ' + gradientVal + ')), to(rgba(255, 255, 255, ' + gradientVal + ')))';
-              el.style.borderRadius = borderVal + 'px';
-              el.style.webkitBoxReflect = 'below 10px -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(255, 255, 255, ' + reflectVal + ')))';
-            }
-          </script>
         </div>
 		
-
+    <!--
         <div class="slide styling" id="css-background">
           <style>
             #background-textarea {

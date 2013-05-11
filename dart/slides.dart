@@ -151,6 +151,7 @@ class Slides {
    _roundedCorners();
    _cssGradient();
    _cssShadow();
+   _logoDemo();
   }
   
   _loadLocalStorageMessage(){
@@ -281,7 +282,7 @@ class Slides {
   }
   
   _changeShadow(e){
-    var el = document.getElementById('shadow-example');
+    var el = query('#shadow-example');
 
     var textXVal = (query('#shadows-text-x') as InputElement).value;
     var textYVal = (query('#shadows-text-y') as InputElement).value;
@@ -301,7 +302,36 @@ class Slides {
 
     el.style.textShadow = 'rgba(64, 64, 64, 0.5)  ${textXVal}px ${textYVal}px ${textSizeVal}px';
     el.style.boxShadow = 'rgba(0, 0, 128, 0.25) ${boxXVal}px ${boxYVal}px ${boxSizeVal}px';
-    //el.style.MozBoxShadow = 'rgba(0, 0, 128, 0.25) ${boxXVal}px ${boxYVal}px ${boxSizeVal}px';    
+  }
+  
+  _logoDemo(){
+    query("#web20-shadow").onChange.listen(_changeWeb20);
+    query("#web20-gradient").onChange.listen(_changeWeb20);
+    query("#web20-border").onChange.listen(_changeWeb20);
+    query("#web20-reflect").onChange.listen(_changeWeb20);
+  }
+  
+  _changeWeb20(e){
+    var el = query('#web20-google');
+
+    var textShadowVal = (query('#web20-shadow') as InputElement).value;
+    query('#web20-shadow-value-1').text = textShadowVal;
+    query('#web20-shadow-value-2').text = textShadowVal;
+
+    var gradientVal = int.parse((query('#web20-gradient') as InputElement).value) / 100;
+    query('#web20-gradient-value-1').text = gradientVal.toString();
+    query('#web20-gradient-value-2').text = gradientVal.toString();
+
+    var borderVal = (query('#web20-border') as InputElement).value;
+    query('#web20-border-value').text = borderVal;
+
+    var reflectVal = int.parse((query('#web20-reflect') as InputElement).value) / 100;
+    query('#web20-reflect-value').text = reflectVal.toString();
+
+    el.style.textShadow = 'rgba(0, 0, 0, 0.5) 0 ${textShadowVal}px ${textShadowVal}px';
+    el.style.background = '-webkit-gradient(linear, left top, left bottom, from(rgba(200, 200, 240, $gradientVal)), to(rgba(255, 255, 255, $gradientVal)))';
+    el.style.borderRadius = '${borderVal}px';
+    el.style.boxReflect = 'below 10px -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(255, 255, 255, ${reflectVal})))';    
   }
  
 }
