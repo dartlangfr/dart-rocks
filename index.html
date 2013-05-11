@@ -1183,7 +1183,6 @@ background:
           </section>
         </div>
 		
-    <!--
         <div class="slide styling" id="css-background">
           <style>
             #background-textarea {
@@ -1211,7 +1210,7 @@ background:
             <pre>#logo {
   background: url(logo.gif) center center no-repeat;
   <b>background-size: 
-    <select onchange="changeBackgroundSize(event)">
+    <select id="css-background-select">
       <option>auto</option>
       <option>contain</option>
       <option>cover</option>
@@ -1229,14 +1228,10 @@ background:
             </pre>
 
             <div id="background-example" class="example">Test</div>
-            <script defer>
-              function changeBackgroundSize(event) {
-                document.getElementById('background-textarea').style.backgroundSize = event.target.value;
-              }
-            </script>
           </section>
         </div>
 
+    <!--
         <div class="slide styling" id="border-image">
           <style>
             #border-image pre {

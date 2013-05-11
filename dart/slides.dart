@@ -152,6 +152,7 @@ class Slides {
    _cssGradient();
    _cssShadow();
    _logoDemo();
+   _cssBackground();
   }
   
   _loadLocalStorageMessage(){
@@ -333,5 +334,9 @@ class Slides {
     el.style.borderRadius = '${borderVal}px';
     el.style.boxReflect = 'below 10px -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(255, 255, 255, ${reflectVal})))';    
   }
+  
+  _cssBackground() =>
+    query("#css-background-select").onChange.listen((Event e) =>
+      query("#background-textarea").style.backgroundSize = (e.target as SelectElement).value);
  
 }
