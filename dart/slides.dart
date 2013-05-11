@@ -3,7 +3,7 @@ import 'dart:math' as Math;
 
 void main(){
   Slides slides = new Slides();
-  slides.start();
+  slides.start(window.location.hash);
   // Keybord 
   window.onKeyDown.listen((KeyboardEvent e) {
     var event = new KeyEvent(e);
@@ -41,7 +41,7 @@ class Slides {
   static final SLIDE_CLASSES = const['distant-slide', 'far-past', 'past', 'current', 'future', 'far-future', 'distant-slide'];
   static final int DISTANCE = 3;
       
-  start(){
+  start(String hash){
     _loadSlides();
     // Init
     _currentPosition = 0;
@@ -57,7 +57,11 @@ class Slides {
     // Mouse binding
     _bindClick();
     // Go !
-    goPosition(_currentPosition, 0);
+    if(hash.isEmpty){
+      goPosition(_currentPosition, 0);
+    } else {
+      goId(hash.substring(1));
+    }
   }
   
   _bindClick(){
@@ -75,9 +79,8 @@ class Slides {
       buffer.write('<li><a data-hash="${e.id}">${e.query('h2').innerHtml}</a>'); 
       buffer.write('<img src="${img.src.replaceAll('_64', '_32')}"></li>'); 
     });
-    Element tocList =  query('#toc-list');
-    tocList.innerHtml = buffer.toString();
-    tocList.queryAll('li a').forEach((element) => element.onClick.listen((event) => goId(element.dataset['hash'])));
+    query('#toc-list')..innerHtml = buffer.toString()
+                      ..queryAll('li a').forEach((element) => element.onClick.listen((event) => goId(element.dataset['hash'])));
   }
   
   next(){
@@ -125,17 +128,20 @@ class Slides {
   
   goId(String id){
     Element element = _slides.firstWhere((e)  => e.id == id);
-    int index = _slides.indexOf(element);
-    // Neighboorhound become distant
-    var from = Math.max(_currentPosition-DISTANCE, 0);
-    var to = Math.min(_currentPosition+DISTANCE, _slidesNumbers-1); 
-    for(int i = from; i<=to; i++){
-      var lastValueIndex = i-_currentPosition+DISTANCE;
-      if(lastValueIndex >0 && lastValueIndex<SLIDE_CLASSES.length){
-        _slides[i].classes.remove(SLIDE_CLASSES[lastValueIndex]);
+    var index = 0;
+    if(element != null){
+      index = _slides.indexOf(element);
+      // Neighboorhound become distant
+      var from = Math.max(_currentPosition-DISTANCE, 0);
+      var to = Math.min(_currentPosition+DISTANCE, _slidesNumbers-1); 
+      for(int i = from; i<=to; i++){
+        var lastValueIndex = i-_currentPosition+DISTANCE;
+        if(lastValueIndex >0 && lastValueIndex<SLIDE_CLASSES.length){
+          _slides[i].classes.remove(SLIDE_CLASSES[lastValueIndex]);
+        }
+        // Add
+        _slides[i].classes.add(SLIDE_CLASSES.last);
       }
-      // Add
-      _slides[i].classes.add(SLIDE_CLASSES.last);
     }
     // go
     goPosition(index, 0);
