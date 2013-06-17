@@ -32,9 +32,9 @@ class Slides {
   Element _counterBackground;
   Element _counterButton;
   Element _help;
-  static final String _CURRENT_CLASS = 'current';
-  static final List<String> _PREVIOUS_CLASSES = const ['past', 'far-past', 'distant-slide'];
-  static final List<String> _NEXT_CLASSES =  const ['future', 'far-future', 'distant-slide'];
+  //static final String _CURRENT_CLASS = 'current';
+  //static final List<String> _PREVIOUS_CLASSES = const ['past', 'far-past', 'distant-slide'];
+  //static final List<String> _NEXT_CLASSES =  const ['future', 'far-future', 'distant-slide'];
   //static final String START_TOKEN = '#landing-slide';
   static final String _SUMMARY = "table-of-contents";
   
@@ -107,6 +107,7 @@ class Slides {
     _currentPosition = position+direction;
     // Token
     _currentToken = _slides[_currentPosition].id;
+
     window.location.hash = '#${_currentToken}';
     // Display current position
     var displayPosition =  (_currentPosition + 1).toString();
@@ -124,6 +125,7 @@ class Slides {
       // Add
       _slides[i].classes.add(SLIDE_CLASSES[i-_currentPosition+DISTANCE]);
     }
+
   }
   
   goId(String id){
