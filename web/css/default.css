@@ -297,6 +297,15 @@ section, footer {
   overflow: hidden;
 }
 
+section.center {
+  line-height: 180%;
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+  height: 700px;
+  width: 900px;
+}
+
 footer {
   font-size: 12px;
   margin: 20px 0 0 30px;
