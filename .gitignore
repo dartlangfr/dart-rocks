@@ -1,5 +1,0 @@
-web/*.dart.*
-packages
-pubspec.lock
-part.*
-deploy/
